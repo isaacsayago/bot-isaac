@@ -1,4 +1,9 @@
-node_modules
+# Dependências do Node.js
+node_modules/
+
+# Arquivos de sessão e credenciais
 whatsapp-session*.json
-package-lock.json
+.wwebjs_auth/
+
+# Mídia baixada ou gerada em tempo de execução
 downloaded-media/

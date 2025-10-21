@@ -1,42 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-	<title>Whatsapp API by Pedrinho da NASA</title>
+    <meta charset="UTF-8">
+    <title>Whatsapp API - Isazap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #app {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin: 15px 0;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #logo {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        #qrcode {
+            width: 200px;
+            height: auto;
+            margin: 20px 0;
+            display: none;
+        }
+
+        ul.logs {
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-left: 20px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        ul.logs li {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 
-	<div id="app">
-		<h1>Whatsapp API</h1>
-		<h3>Entre agora para comunidade ZDG: <a href="https://comunidadezdg.com.br/">clique aqui</a></h3>
-		<p>ZDG MOD</p>
-		<img src="" alt="QR Code" id="qrcode">
-		<h3>Logs:</h3>
-		<ul class="logs"></ul>
-	</div>
+    <div id="app">
+        <img src="isazap.png" alt="Logo Isazap" id="logo">
+        <h1>Whatsapp API - Isazap</h1>
+        <h3>Entre agora para Isazap: <a href="https://site.isazap.com.br/" target="_blank">clique aqui</a></h3>
+        <img src="" alt="QR Code" id="qrcode">
+        <h3>Logs:</h3>
+        <ul class="logs"></ul>
+    </div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" crossorigin="anonymous"></script>
-	<script>
-		$(document).ready(function() {
-			var socket = io();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            var socket = io();
 
-			socket.on('message', function(msg) {
-				$('.logs').append($('<li>').text(msg));
-			});
+            socket.on('message', function(msg) {
+                $('.logs').append($('<li>').text(msg));
+            });
 
-			socket.on('qr', function(src) {
-				$('#qrcode').attr('src', src);
-				$('#qrcode').show();
-			});
+            socket.on('qr', function(src) {
+                $('#qrcode').attr('src', src);
+                $('#qrcode').show();
+            });
 
-			socket.on('ready', function(data) {
-				$('#qrcode').hide();
-			});
+            socket.on('ready', function(data) {
+                $('#qrcode').hide();
+            });
 
-			socket.on('authenticated', function(data) {
-				$('#qrcode').hide();
-			});
-		});
-	</script>
+            socket.on('authenticated', function(data) {
+                $('#qrcode').hide();
+            });
+        });
+    </script>
 </body>
 </html>
